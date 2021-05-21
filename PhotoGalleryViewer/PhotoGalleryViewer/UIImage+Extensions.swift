@@ -7,12 +7,21 @@
 
 import UIKit
 
-typealias PhotoFilterApplier = ((UIImage, @escaping (UIImage?) -> Void) -> Void)
+typealias PhotoFilterApplier = ((UIImage, @escaping (ApplyingFilterResult) -> Void) -> Void)
+
+enum ApplyingFilterResult {
+  case success(UIImage)
+  case failure(ApplyingFilterError)
+}
+
+enum ApplyingFilterError: Error {
+  case failedToGeneratePNGData, failedToCreateFilterWithAGivenName, failedToApplyFilter
+}
 
 extension UIImage {
-  static func applyingSepiaFilter(forImage image: UIImage, completionHandler: @escaping (UIImage?) -> Void) {
+  static func applyingSepiaFilter(forImage image: UIImage, completionHandler: @escaping (ApplyingFilterResult) -> Void) {
     guard let data = image.pngData() else {
-      completionHandler(nil)
+      completionHandler(.failure(ApplyingFilterError.failedToGeneratePNGData))
       return
     }
     let inputImage = CIImage(data: data)
@@ -20,7 +29,7 @@ extension UIImage {
     let context = CIContext(options: nil)
         
     guard let filter = CIFilter(name: "CISepiaTone") else {
-      completionHandler(nil)
+      completionHandler(.failure(ApplyingFilterError.failedToCreateFilterWithAGivenName))
       return
     }
     filter.setValue(inputImage, forKey: kCIInputImageKey)
@@ -30,9 +39,9 @@ extension UIImage {
       let outputImage = filter.outputImage,
       let outImage = context.createCGImage(outputImage, from: outputImage.extent)
     else {
-      completionHandler(nil)
+      completionHandler(.failure(ApplyingFilterError.failedToApplyFilter))
       return
     }
-    completionHandler(UIImage(cgImage: outImage))
+    completionHandler(.success(UIImage(cgImage: outImage)))
   }
 }

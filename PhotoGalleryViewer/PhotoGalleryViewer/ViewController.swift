@@ -30,9 +30,14 @@ class ViewController: UITableViewController {
       targetSize: cell.photoImageView.bounds.size
     ) { [weak self] cachedImage in
       if let image = cachedImage, cell.representedAssetIdentifier == id {
-        self?.photoFilterApplier(image) { filteredImage in
-          if let image = filteredImage, cell.representedAssetIdentifier == id {
-            cell.photoImageView.image = image
+        DispatchQueue.global(qos: .userInitiated).async {
+          self?.photoFilterApplier(image) { filterResult in
+            DispatchQueue.main.async {
+              if case let ApplyingFilterResult.success(filteredImage) = filterResult,
+                 cell.representedAssetIdentifier == id {
+                cell.photoImageView.image = filteredImage
+              }
+            }
           }
         }
       }
