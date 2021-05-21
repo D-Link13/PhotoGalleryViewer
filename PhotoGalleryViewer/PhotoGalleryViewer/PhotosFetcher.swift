@@ -1,5 +1,5 @@
 //
-//  PhotoGallery.swift
+//  PhotosFetcher.swift
 //  PhotoGalleryViewer
 //
 //  Created by Dmitry Tsurkan on 21.05.2021.
@@ -8,9 +8,9 @@
 import UIKit
 import Photos
 
-class PhotoGallery: PhotoGalleryPresenter {
+class PhotosFetcher: PhotosFetcherProtocol {
   private var fetchResult: PHFetchResult<PHAsset>!
-  private let imageManager = PHCachingImageManager()
+  private lazy var imageManager = PHCachingImageManager()
   
   func fetchAssets() {
     if fetchResult == nil {
@@ -25,10 +25,12 @@ class PhotoGallery: PhotoGalleryPresenter {
   }
   
   func localIdentifierForAsset(at indexPath: IndexPath) -> String {
-    return fetchResult.object(at: indexPath.item).localIdentifier
+    return fetchResult
+      .object(at: indexPath.item)
+      .localIdentifier
   }
   
-  func requestCachedPhotoAsset(at indexPath: IndexPath, targetSize: CGSize, resultHandler: @escaping (UIImage?) -> Void) {
+  func requestCachedImage(at indexPath: IndexPath, targetSize: CGSize, resultHandler: @escaping (UIImage?) -> Void) {
     let asset = fetchResult.object(at: indexPath.item)
     imageManager.requestImage(for: asset,
                               targetSize: targetSize,

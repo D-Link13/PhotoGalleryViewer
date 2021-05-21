@@ -1,5 +1,5 @@
 //
-//  PhotoGalleryPresenter.swift
+//  PhotosFetcherProtocol.swift
 //  PhotoGalleryViewer
 //
 //  Created by Dmitry Tsurkan on 21.05.2021.
@@ -7,9 +7,9 @@
 
 import UIKit
 
-protocol PhotoGalleryPresenter {
+protocol PhotosFetcherProtocol {
   func fetchAssets()
   func numberOfAssets() -> Int
   func localIdentifierForAsset(at indexPath: IndexPath) -> String
-  func requestCachedPhotoAsset(at indexPath: IndexPath, targetSize: CGSize, resultHandler: @escaping (UIImage?) -> Void)
+  func requestCachedImage(at indexPath: IndexPath, targetSize: CGSize, resultHandler: @escaping (UIImage?) -> Void)
 }

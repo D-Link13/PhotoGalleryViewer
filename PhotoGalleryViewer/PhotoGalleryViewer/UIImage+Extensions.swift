@@ -7,14 +7,22 @@
 
 import UIKit
 
+typealias PhotoFilterApplier = ((UIImage, @escaping (UIImage?) -> Void) -> Void)
+
 extension UIImage {
-  func applyingSepiaFilter() -> UIImage? {
-    guard let data = self.pngData() else { return nil }
+  static func applyingSepiaFilter(forImage image: UIImage, completionHandler: @escaping (UIImage?) -> Void) {
+    guard let data = image.pngData() else {
+      completionHandler(nil)
+      return
+    }
     let inputImage = CIImage(data: data)
         
     let context = CIContext(options: nil)
         
-    guard let filter = CIFilter(name: "CISepiaTone") else { return nil }
+    guard let filter = CIFilter(name: "CISepiaTone") else {
+      completionHandler(nil)
+      return
+    }
     filter.setValue(inputImage, forKey: kCIInputImageKey)
     filter.setValue(0.8, forKey: "inputIntensity")
         
@@ -22,8 +30,9 @@ extension UIImage {
       let outputImage = filter.outputImage,
       let outImage = context.createCGImage(outputImage, from: outputImage.extent)
     else {
-      return nil
+      completionHandler(nil)
+      return
     }
-    return UIImage(cgImage: outImage)
+    completionHandler(UIImage(cgImage: outImage))
   }
 }
