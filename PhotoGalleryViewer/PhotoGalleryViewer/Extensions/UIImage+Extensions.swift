@@ -7,19 +7,14 @@
 
 import UIKit
 
-typealias PhotoFilterApplier = ((UIImage, @escaping (ApplyingFilterResult) -> Void) -> Void)
-
-enum ApplyingFilterResult {
-  case success(UIImage)
-  case failure(ApplyingFilterError)
-}
+typealias PhotoFilterApplier = ((UIImage, @escaping (Result<UIImage, Error>) -> Void) -> Void)
 
 enum ApplyingFilterError: Error {
   case failedToGeneratePNGData, failedToCreateFilterWithAGivenName, failedToApplyFilter
 }
 
 extension UIImage {
-  static func applyingSepiaFilter(forImage image: UIImage, completionHandler: @escaping (ApplyingFilterResult) -> Void) {
+  static func applyingSepiaFilter(forImage image: UIImage, completionHandler: @escaping (Result<UIImage, Error>) -> Void) {
     guard let data = image.pngData() else {
       completionHandler(.failure(ApplyingFilterError.failedToGeneratePNGData))
       return

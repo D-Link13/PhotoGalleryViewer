@@ -46,7 +46,7 @@ class PhotoGalleryViewController: UITableViewController {
         DispatchQueue.global(qos: .userInitiated).async {
           self?.photoFilterApplier(image) { filterResult in
             DispatchQueue.main.async {
-              if case let ApplyingFilterResult.success(filteredImage) = filterResult,
+              if case let .success(filteredImage) = filterResult,
                  cell.representedAssetIdentifier == id {
                 cell.photoImageView.image = filteredImage
               }
