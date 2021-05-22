@@ -8,8 +8,10 @@
 import UIKit
 
 protocol PhotosFetcherProtocol {
+  var isAbleToFetch: Bool { get }
+  func requestAuthorization(completion: @escaping (Bool) -> Void)
   func fetchAssets()
   func numberOfAssets() -> Int
-  func localIdentifierForAsset(at indexPath: IndexPath) -> String
+  func localIdentifierForAsset(at indexPath: IndexPath) -> String?
   func requestCachedImage(at indexPath: IndexPath, targetSize: CGSize, resultHandler: @escaping (UIImage?) -> Void)
 }
