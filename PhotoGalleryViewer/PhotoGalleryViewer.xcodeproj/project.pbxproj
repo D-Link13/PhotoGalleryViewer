@@ -13,10 +13,11 @@
 		90A1CF592656DFD200C131E5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90A1CF582656DFD200C131E5 /* Assets.xcassets */; };
 		90A1CF5C2656DFD200C131E5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90A1CF5A2656DFD200C131E5 /* LaunchScreen.storyboard */; };
 		90A1CF652656E54600C131E5 /* PhotoImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1CF632656E54600C131E5 /* PhotoImageTableViewCell.swift */; };
-		90A1CF682657B7FE00C131E5 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1CF672657B7FE00C131E5 /* UIImage+Extensions.swift */; };
+		90A1CF682657B7FE00C131E5 /* PhotoFilterApplier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1CF672657B7FE00C131E5 /* PhotoFilterApplier.swift */; };
 		90A1CF6A2657BC9100C131E5 /* PhotosFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1CF692657BC9100C131E5 /* PhotosFetcher.swift */; };
 		90A1CF6C2657BFE000C131E5 /* PhotosFetcherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1CF6B2657BFE000C131E5 /* PhotosFetcherProtocol.swift */; };
 		90A1CF7E26593ED400C131E5 /* UIAlertController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1CF7D26593ED400C131E5 /* UIAlertController+Extensions.swift */; };
+		90B36721265AF0B5005B300E /* PhotoFilterApplierProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B36720265AF0B5005B300E /* PhotoFilterApplierProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +29,11 @@
 		90A1CF5B2656DFD200C131E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		90A1CF5D2656DFD200C131E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90A1CF632656E54600C131E5 /* PhotoImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoImageTableViewCell.swift; sourceTree = "<group>"; };
-		90A1CF672657B7FE00C131E5 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
+		90A1CF672657B7FE00C131E5 /* PhotoFilterApplier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilterApplier.swift; sourceTree = "<group>"; };
 		90A1CF692657BC9100C131E5 /* PhotosFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosFetcher.swift; sourceTree = "<group>"; };
 		90A1CF6B2657BFE000C131E5 /* PhotosFetcherProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosFetcherProtocol.swift; sourceTree = "<group>"; };
 		90A1CF7D26593ED400C131E5 /* UIAlertController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+Extensions.swift"; sourceTree = "<group>"; };
+		90B36720265AF0B5005B300E /* PhotoFilterApplierProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFilterApplierProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +68,10 @@
 			children = (
 				90A1CF4F2656DFCF00C131E5 /* AppDelegate.swift */,
 				90A1CF6B2657BFE000C131E5 /* PhotosFetcherProtocol.swift */,
+				90B36720265AF0B5005B300E /* PhotoFilterApplierProtocol.swift */,
 				90A1CF822659439200C131E5 /* UI */,
 				90A1CF812659434A00C131E5 /* PhotosFetcher */,
+				90B36722265AF10A005B300E /* PhotoFilterApplier */,
 				90A1CF5D2656DFD200C131E5 /* Info.plist */,
 				90A1CF802659427000C131E5 /* Supporting Files */,
 				90A1CF7F26593EE700C131E5 /* Extensions */,
@@ -78,7 +82,6 @@
 		90A1CF7F26593EE700C131E5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				90A1CF672657B7FE00C131E5 /* UIImage+Extensions.swift */,
 				90A1CF7D26593ED400C131E5 /* UIAlertController+Extensions.swift */,
 			);
 			path = Extensions;
@@ -109,6 +112,14 @@
 				90A1CF632656E54600C131E5 /* PhotoImageTableViewCell.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		90B36722265AF10A005B300E /* PhotoFilterApplier */ = {
+			isa = PBXGroup;
+			children = (
+				90A1CF672657B7FE00C131E5 /* PhotoFilterApplier.swift */,
+			);
+			name = PhotoFilterApplier;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,9 +196,10 @@
 				90A1CF502656DFCF00C131E5 /* AppDelegate.swift in Sources */,
 				90A1CF6C2657BFE000C131E5 /* PhotosFetcherProtocol.swift in Sources */,
 				90A1CF652656E54600C131E5 /* PhotoImageTableViewCell.swift in Sources */,
+				90B36721265AF0B5005B300E /* PhotoFilterApplierProtocol.swift in Sources */,
 				90A1CF7E26593ED400C131E5 /* UIAlertController+Extensions.swift in Sources */,
 				90A1CF6A2657BC9100C131E5 /* PhotosFetcher.swift in Sources */,
-				90A1CF682657B7FE00C131E5 /* UIImage+Extensions.swift in Sources */,
+				90A1CF682657B7FE00C131E5 /* PhotoFilterApplier.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

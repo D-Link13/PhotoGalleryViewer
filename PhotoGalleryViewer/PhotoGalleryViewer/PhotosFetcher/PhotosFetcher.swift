@@ -54,10 +54,12 @@ class PhotosFetcher: PhotosFetcherProtocol {
       resultHandler(nil)
       return
     }
+    let options = PHImageRequestOptions()
+    options.resizeMode = .exact
     imageManager.requestImage(for: asset,
                               targetSize: targetSize,
                               contentMode: .aspectFit,
-                              options: nil) { image, _ in
+                              options: options) { image, _ in
       resultHandler(image)
     }
   }

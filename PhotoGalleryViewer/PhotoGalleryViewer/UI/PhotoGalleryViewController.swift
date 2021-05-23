@@ -9,7 +9,7 @@ import UIKit
 
 class PhotoGalleryViewController: UITableViewController {
   private lazy var photosFetcher: PhotosFetcherProtocol = PhotosFetcher()
-  private lazy var photoFilterApplier: PhotoFilterApplier = UIImage.applyingSepiaFilter
+  private lazy var photoFilterApplier: PhotoFilterApplierProtocol = PhotoFilterApplier()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -43,8 +43,9 @@ class PhotoGalleryViewController: UITableViewController {
       targetSize: cell.photoImageView.bounds.size
     ) { [weak self] cachedImage in
       if let image = cachedImage, cell.representedAssetIdentifier == id {
-        DispatchQueue.global(qos: .userInitiated).async {
-          self?.photoFilterApplier(image) { filterResult in
+        cell.photoImageView.image = image
+        DispatchQueue.global(qos: .userInteractive).async {
+          self?.photoFilterApplier.applySepia(to: image) { filterResult in
             DispatchQueue.main.async {
               if case let .success(filteredImage) = filterResult,
                  cell.representedAssetIdentifier == id {
