@@ -14,6 +14,10 @@ class PhotoGalleryViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    requestPhotosGallery()
+  }
+  
+  private func requestPhotosGallery() {
     if photosFetcher.isAbleToFetch {
       photosFetcher.fetchAssets()
     } else {
@@ -58,4 +62,5 @@ class PhotoGalleryViewController: UITableViewController {
     }
     return cell
   }
+  
 }
