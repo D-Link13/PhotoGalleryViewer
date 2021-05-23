@@ -42,17 +42,15 @@ class PhotoGalleryViewController: UITableViewController {
     let id = photosFetcher.localIdentifierForAsset(at: indexPath)
     cell.representedAssetIdentifier = id
     
-    photosFetcher.requestCachedImage(
-      at: indexPath,
-      targetSize: cell.photoImageView.bounds.size
-    ) { [weak self] cachedImage in
+    photosFetcher.requestCachedImage(at: indexPath, targetSize: cell.photoImageView.bounds.size ) { cachedImage in
+      
       if let image = cachedImage, cell.representedAssetIdentifier == id {
         cell.photoImageView.image = image
-        DispatchQueue.global(qos: .userInteractive).async {
+        
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
           self?.photoFilterApplier.applySepia(to: image) { filterResult in
             DispatchQueue.main.async {
-              if case let .success(filteredImage) = filterResult,
-                 cell.representedAssetIdentifier == id {
+              if case let .success(filteredImage) = filterResult, cell.representedAssetIdentifier == id {
                 cell.photoImageView.image = filteredImage
               }
             }
